@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "前端工程化"
   text: "VUE3 + TypeScript 学习文档"
-  tagline: "学习是少数人的狂欢，亦是孤独者的游戏"
+  tagline: "学习爽"
   image:
     src: https://guke-bucket.oss-cn-nanjing.aliyuncs.com/images/ai.png
     alt: Chorme 浏览器插件
