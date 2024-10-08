@@ -20,12 +20,12 @@ hero:
 features:
   - icon:
     title: 快速入门
-    details: 从头开始，循序渐进地学习VUE 3 和 TypeScript,
+    details: 从头开始,循序渐进地学习VUE 3 和 TypeScript,
   - icon:
     title: 最佳实践
     details: 涵盖从组件设计到代码开发优化的实际来发经验，
   - icon:
-    title: 搞笑开发
+    title: 高效开发
     details: 通过 Vitepress 和 TypeScript, 快速搭建高效， 可维护的 Vue 3 应用，
 ---
 
