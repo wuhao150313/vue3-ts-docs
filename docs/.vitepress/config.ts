@@ -26,6 +26,7 @@ export default defineConfig({
                         { text: "介绍", link: "/guide/" },
                         { text: "安装", link: "/guide/installation" },
                         { text: "基本概念", link: "/guide/concepts" },
+                        { text: "关于vueuse", link: "/guide/vueuseguide" }
                     ],
                 },
             ],
@@ -37,7 +38,8 @@ export default defineConfig({
                         { text: "按钮 Button", link: "/components/button" },
                         { text: "表单 Form", link: "/components/form" },
                         { text: "表格 Table", link: "/components/table" },
-                        { text: "组合式函数", link: "/components/mixcomponent" }
+                        { text: "组合式函数", link: "/components/mixcomponent" },
+                        { text: "vueuse实践", link: "/components/vueusetest" }
                     ],
                 },
             ],
