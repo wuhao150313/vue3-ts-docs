@@ -36,41 +36,46 @@ Vue 组件是 Vue.js 框架中的核心概念，允许开发者将应用拆分�
 
 ### 第一个代码：VueUse 实现白天/夜间模式切换
 
-```
+```vue
 <template>
-    <div>
-        <h1>小心眼睛</h1>
-        <!-- 切换按钮，点击时调用 handleToggle 函数，显示当前模式 -->
-        <button @click="handleToggle">
-            切换到 {{ isDark ? '白天模式' : '黑夜模式' }}
-        </button>
-    </div>
+     
+  <div>
+           
+    <h1>小心眼睛</h1>
+           
+    <!-- 切换按钮，点击时调用 handleToggle 函数，显示当前模式 -->
+           
+    <button @click="handleToggle">
+                  切换到 {{ isDark ? "白天模式" : "黑夜模式" }}        
+    </button>
+       
+  </div>
 </template>
 
 <script setup lang="ts">
-import { useDark, useToggle } from '@vueuse/core'
-import { watch } from 'vue'
+import { useDark, useToggle } from "@vueuse/core";
+import { watch } from "vue";
 
 // 使用 VueUse 的 useDark 检测是否是夜间模式，useToggle 进行模式切换
-const isDark = useDark() // 响应式变量，监控当前模式（黑暗或光明）
-const toggleDarkMode = useToggle(isDark) // 返回一个切换模式的函数
+const isDark = useDark(); // 响应式变量，监控当前模式（黑暗或光明）
+const toggleDarkMode = useToggle(isDark); // 返回一个切换模式的函数
 
 // 点击事件处理函数
 const handleToggle = () => {
-    toggleDarkMode() // 切换当前模式
-    document.body.classList.toggle('dark', isDark.value) // 根据模式添加或移除 'dark' 类
-    console.log('当前模式:', isDark.value) // 控制台输出当前模式
-}
+  toggleDarkMode(); // 切换当前模式
+  document.body.classList.toggle("dark", isDark.value); // 根据模式添加或移除 'dark' 类
+  console.log("当前模式:", isDark.value); // 控制台输出当前模式
+};
 
 // 监听 isDark 变化，将模式存入 localStorage 以便下次加载时恢复
 watch(isDark, (newValue) => {
-    localStorage.setItem('dark-mode', newValue ? 'true' : 'false')
-})
+  localStorage.setItem("dark-mode", newValue ? "true" : "false");
+});
 
 // 初始化时从 localStorage 获取模式状态并应用
-if (localStorage.getItem('dark-mode') === 'true') {
-    isDark.value = true // 设置为夜间模式
-    document.body.classList.add('dark') // 加载时立即应用 'dark' 类
+if (localStorage.getItem("dark-mode") === "true") {
+  isDark.value = true; // 设置为夜间模式
+  document.body.classList.add("dark"); // 加载时立即应用 'dark' 类
 }
 </script>
 
@@ -114,40 +119,49 @@ button {
 
 ### 第二个代码：音量调节
 
-```
+```vue
 <template>
-    <div class="container">
-        <!-- 显示当前音量百分比 -->
-        <p class="volume-text">当前音量: {{ volume }}%</p>
-        <div class="controls">
-            <!-- 滑块控制音量，v-model 绑定音量值 -->
-            <input type="range" v-model="volume" min="0" max="100" />
-            <!-- 按钮用于切换静音 -->
-            <button @click="toggleMute" class="mute-btn">
-                {{ isMuted ? '取消静音' : '静音' }}
-            </button>
-        </div>
-    </div>
+     
+  <div class="container">
+           
+    <!-- 显示当前音量百分比 -->
+           
+    <p class="volume-text">当前音量: {{ volume }}%</p>
+           
+    <div class="controls">
+                 
+      <!-- 滑块控制音量，v-model 绑定音量值 -->
+                  <input type="range" v-model="volume" min="0" max="100" />    
+             
+      <!-- 按钮用于切换静音 -->
+                 
+      <button @click="toggleMute" class="mute-btn">
+                        {{ isMuted ? "取消静音" : "静音" }}            
+      </button>
+             
+    </div>
+       
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useStorage } from '@vueuse/core';
+import { ref } from "vue";
+import { useStorage } from "@vueuse/core";
 
 // 保存音量值到 localStorage，初始化为 50%
-const volume = useStorage('volume', 50);
+const volume = useStorage("volume", 50);
 const previousVolume = ref(volume.value); // 保存静音前的音量
 const isMuted = ref(false); // 静音状态
 
 // 切换静音功能
 const toggleMute = () => {
-    if (isMuted.value) {
-        volume.value = previousVolume.value; // 恢复静音前音量
-    } else {
-        previousVolume.value = volume.value; // 记录当前音量
-        volume.value = 0; // 设置为静音
-    }
-    isMuted.value = !isMuted.value; // 切换静音状态
+  if (isMuted.value) {
+    volume.value = previousVolume.value; // 恢复静音前音量
+  } else {
+    previousVolume.value = volume.value; // 记录当前音量
+    volume.value = 0; // 设置为静音
+  }
+  isMuted.value = !isMuted.value; // 切换静音状态
 };
 </script>
 
@@ -214,29 +228,29 @@ input[type="range"] {
 
 ### 第三个代码：选色板显示颜色编号
 
-```
+```vue
 <template>
-    <div class="container">
-        <!-- 颜色选择器 -->
-        <div class="color-picker-column">
-            <input type="color" v-model="color" class="color-picker" />
-        </div>
-        <!-- 显示颜色值 -->
-        <div class="color-display-column">
-            <p>当前颜色:</p>
-            <p class="color-code">16进制: {{ color }}</p>
-            <p class="color-code">RGB: {{ rgbColor }}</p>
-            <p class="color-code">HSL: {{ hslColor }}</p>
-        </div>
+  <div class="container">
+    <!-- 颜色选择器 -->
+    <div class="color-picker-column">
+      <input type="color" v-model="color" class="color-picker" />
     </div>
+    <!-- 显示颜色值 -->
+    <div class="color-display-column">
+      <p>当前颜色:</p>
+      <p class="color-code">16进制: {{ color }}</p>
+      <p class="color-code">RGB: {{ rgbColor }}</p>
+      <p class="color-code">HSL: {{ hslColor }}</p>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useColorConversion } from '../composables/useColorConversion' // 导入封装好的颜色转换逻辑
+import { ref } from "vue";
+import { useColorConversion } from "../composables/useColorConversion"; // 导入封装好的颜色转换逻辑
 
 // 设置默认颜色为红色
-const color = ref('#ff0000');
+const color = ref("#ff0000");
 
 // 使用封装的 useColorConversion composable 进行颜色转换
 const { rgbColor, hslColor } = useColorConversion(color);
@@ -244,31 +258,31 @@ const { rgbColor, hslColor } = useColorConversion(color);
 
 <style scoped>
 .container {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 20px;
 }
 
 .color-picker-column,
 .color-display-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .color-picker {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    border: 2px solid black;
-    /* 设置黑色边框，便于观察颜色差异 */
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border: 2px solid black;
+  /* 设置黑色边框，便于观察颜色差异 */
 }
 
 .color-code {
-    margin-top: 10px;
-    /* 与“当前颜色”标题保持一些距离 */
-    font-weight: bold;
+  margin-top: 10px;
+  /* 与“当前颜色”标题保持一些距离 */
+  font-weight: bold;
 }
 </style>
 ```
@@ -299,46 +313,55 @@ const { rgbColor, hslColor } = useColorConversion(color);
 
 ### useColorConversion 的逻辑
 
-```
-import { computed, Ref } from 'vue';
+```ts
+import { computed, Ref } from "vue";
 
 export function useColorConversion(color: Ref<string>) {
-    // 将16进制颜色转换为RGB格式
-    function hexToRgb(hex: string) {
-        const r = parseInt(hex.slice(1, 3), 16); // 解析红色分量
-        const g = parseInt(hex.slice(3, 5), 16); // 解析绿色分量
-        const b = parseInt(hex.slice(5, 7), 16); // 解析蓝色分量
-        return `rgb(${r}, ${g}, ${b})`; // 返回RGB格式
+  // 将16进制颜色转换为RGB格式
+  function hexToRgb(hex: string) {
+    const r = parseInt(hex.slice(1, 3), 16); // 解析红色分量
+    const g = parseInt(hex.slice(3, 5), 16); // 解析绿色分量
+    const b = parseInt(hex.slice(5, 7), 16); // 解析蓝色分量
+    return `rgb(${r}, ${g}, ${b})`; // 返回RGB格式
+  }
+
+  // 将16进制颜色转换为HSL格式
+  function hexToHsl(hex: string) {
+    let r = parseInt(hex.slice(1, 3), 16) / 255;
+    let g = parseInt(hex.slice(3, 5), 16) / 255;
+    let b = parseInt(hex.slice(5, 7), 16) / 255;
+    let max = Math.max(r, g, b),
+      min = Math.min(r, g, b);
+    let h = 0,
+      s = 0,
+      l = (max + min) / 2;
+
+    if (max != min) {
+      let d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+      h *= 60;
     }
+    s = s * 100;
+    l = l * 100;
+    return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+  }
 
-    // 将16进制颜色转换为HSL格式
-    function hexToHsl(hex: string) {
-        let r = parseInt(hex.slice(1, 3), 16) / 255;
-        let g = parseInt(hex.slice(3, 5), 16) / 255;
-        let b = parseInt(hex.slice(5, 7), 16) / 255;
-        let max = Math.max(r, g, b), min = Math.min(r, g, b);
-        let h = 0, s = 0, l = (max + min) / 2;
+  // 使用 computed 属性动态计算 RGB 和 HSL 值
+  const rgbColor = computed(() => hexToRgb(color.value));
+  const hslColor = computed(() => hexToHsl(color.value));
 
-        if (max != min) {
-            let d = max - min;
-            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-            switch (max) {
-                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                case g: h = (b - r) / d + 2; break;
-                case b: h = (r - g) / d + 4; break;
-            }
-            h *= 60;
-        }
-        s = s * 100;
-        l = l * 100;
-        return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
-    }
-
-    // 使用 computed 属性动态计算 RGB 和 HSL 值
-    const rgbColor = computed(() => hexToRgb(color.value));
-    const hslColor = computed(() => hexToHsl(color.value));
-
-    return { rgbColor, hslColor };
+  return { rgbColor, hslColor };
 }
 ```
 

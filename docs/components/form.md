@@ -28,7 +28,7 @@
 
 ### 1. 基础用户注册表单
 
-```
+```vue
 <template>
   <form @submit.prevent="handleSubmit">
     <div>
@@ -44,14 +44,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const username = ref('');  // 用户名的响应式数据
-const email = ref('');     // 邮箱的响应式数据
+const username = ref(""); // 用户名的响应式数据
+const email = ref(""); // 邮箱的响应式数据
 
 const handleSubmit = () => {
   console.log(`用户名: ${username.value}, 邮箱: ${email.value}`);
-  alert('注册成功！');
+  alert("注册成功！");
 };
 </script>
 
@@ -80,7 +80,7 @@ input {
 
 ### 2. 搜索表单
 
-```
+```vue
 <template>
   <form @submit.prevent="handleSearch">
     <div>
@@ -92,9 +92,9 @@ input {
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const searchTerm = ref('');  // 搜索关键词的响应式数据
+const searchTerm = ref(""); // 搜索关键词的响应式数据
 
 const handleSearch = () => {
   console.log(`搜索关键词: ${searchTerm.value}`);
@@ -126,7 +126,7 @@ input {
 
 ### 3. 反馈表单（带验证）
 
-```
+```vue
 <template>
   <form @submit.prevent="handleSubmit">
     <div>
@@ -139,18 +139,18 @@ input {
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const feedback = ref('');           // 反馈内容的响应式数据
-const errorMessage = ref('');       // 错误信息的响应式数据
+const feedback = ref(""); // 反馈内容的响应式数据
+const errorMessage = ref(""); // 错误信息的响应式数据
 
 const handleSubmit = () => {
   if (feedback.value.length < 10) {
-    errorMessage.value = '反馈内容至少需要 10 个字符';  // 反馈内容长度验证
+    errorMessage.value = "反馈内容至少需要 10 个字符"; // 反馈内容长度验证
   } else {
-    errorMessage.value = '';  // 清除错误信息
+    errorMessage.value = ""; // 清除错误信息
     console.log(`反馈内容: ${feedback.value}`);
-    alert('反馈提交成功！');
+    alert("反馈提交成功！");
   }
 };
 </script>

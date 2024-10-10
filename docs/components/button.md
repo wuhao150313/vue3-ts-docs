@@ -24,7 +24,7 @@
 
 ### 1. 基础按钮
 
-```
+```vue
 <template>
   <button @click="handleClick" :disabled="isDisabled">
     {{ buttonText }}
@@ -68,7 +68,7 @@ button:disabled {
 
 ### 2. 图标按钮
 
-```
+```vue
 <template>
   <button @click="handleClick" class="icon-button">
     <span class="icon">🔍</span>
@@ -112,7 +112,7 @@ const handleClick = () => {
 
 ### 3. 加载状态按钮
 
-```
+```vue
 <template>
   <button @click="handleSubmit" :disabled="isLoading">
     <span v-if="isLoading" class="spinner"></span>

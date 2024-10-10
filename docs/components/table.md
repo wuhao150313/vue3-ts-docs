@@ -40,7 +40,7 @@
 
 ### 1. 静态数据表格
 
-```
+```vue
 <template>
   <table>
     <thead>
@@ -76,7 +76,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -97,7 +98,7 @@ th {
 
 ### 2. 动态数据表格
 
-```
+```vue
 <template>
   <table>
     <thead>
@@ -118,12 +119,12 @@ th {
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const users = ref([
-  { name: '张三', age: 28, city: '北京' },
-  { name: '李四', age: 32, city: '上海' },
-  { name: '王五', age: 24, city: '广州' },
+  { name: "张三", age: 28, city: "北京" },
+  { name: "李四", age: 32, city: "上海" },
+  { name: "王五", age: 24, city: "广州" },
 ]);
 </script>
 
@@ -133,7 +134,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -154,7 +156,7 @@ th {
 
 ### 3. 可编辑表格
 
-```
+```vue
 <template>
   <table>
     <thead>
@@ -185,16 +187,16 @@ th {
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const users = ref([
-  { name: '张三', age: 28, city: '北京' },
-  { name: '李四', age: 32, city: '上海' },
-  { name: '王五', age: 24, city: '广州' },
+  { name: "张三", age: 28, city: "北京" },
+  { name: "李四", age: 32, city: "上海" },
+  { name: "王五", age: 24, city: "广州" },
 ]);
 
 const deleteUser = (index: number) => {
-  users.value.splice(index, 1);  // 从数组中删除用户
+  users.value.splice(index, 1); // 从数组中删除用户
 };
 </script>
 
@@ -204,7 +206,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
 }

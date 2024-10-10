@@ -60,7 +60,7 @@ Vue 3 推出的新 API，允许将逻辑更加灵活地拆分和复用。使用 
 
 一个用户登录表单，输入用户名和密码，并在点击按钮后触发登录操作。
 
-```
+```vue
 <template>
   <div>
     <input v-model="username" placeholder="请输入用户名" />
@@ -70,16 +70,16 @@ Vue 3 推出的新 API，允许将逻辑更加灵活地拆分和复用。使用 
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
   setup() {
-    const username = ref('');
-    const password = ref('');
+    const username = ref("");
+    const password = ref("");
 
     const login = () => {
-      console.log('用户名:', username.value);
-      console.log('密码:', password.value);
+      console.log("用户名:", username.value);
+      console.log("密码:", password.value);
     };
 
     return { username, password, login };
@@ -112,7 +112,7 @@ login 函数通过点击事件触发，输出表单内容。
 
 一个可以倒计时的按钮，倒计时结束后按钮不可用。
 
-```
+```vue
 <template>
   <div>
     <p>剩余时间: {{ time }}</p>
@@ -121,7 +121,7 @@ login 函数通过点击事件触发，输出表单内容。
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 // 逻辑封装
 const time = ref(10);
@@ -166,7 +166,7 @@ startCountdown 函数通过 setInterval 实现每秒倒计时，并在倒计时�
 
 一个可以弹出提示的按钮，点击按钮后显示一条消息。
 
-```
+```vue
 <template>
   <div>
     <button @click="showMessage">点击显示消息</button>
@@ -175,9 +175,9 @@ startCountdown 函数通过 setInterval 实现每秒倒计时，并在倒计时�
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const message = ref('这是一个提示消息');
+const message = ref("这是一个提示消息");
 const visible = ref(false);
 
 const showMessage = () => {
